@@ -1,1 +1,1 @@
-# cosmic_path_optimization
+# Cosmic Path Optimization
