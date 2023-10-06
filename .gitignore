@@ -169,3 +169,8 @@ cython_debug/
 .TemporaryItems
 .DocumentRevisions-V100
 .VolumeIcon.icns
+
+# Kattis files and other info
+
+kattis-cli/
+.kattisrc
