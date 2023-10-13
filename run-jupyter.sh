@@ -123,10 +123,9 @@ else
     exit 1
 fi
 
-
 if [ ${#args[@]} -eq 0 ]
 then
-    args=("bash" "-c" "cd $GUEST_DIR; sudo bash script.sh; zsh")
+    args=("bash" "-c" "cd $GUEST_DIR; jupyter notebook --ip 0.0.0.0 --port 9999 --no-browser")
 fi
 
 echo "$container run '$CONTAINER_TAG' (mounting host '$HOST_DIR' as '$GUEST_DIR'):" \
@@ -134,11 +133,8 @@ echo "$container run '$CONTAINER_TAG' (mounting host '$HOST_DIR' as '$GUEST_DIR'
 
 winenv $container run -it --rm \
     -v "$HOST_DIR:$GUEST_DIR$(optZ)" \
-    -v "$HOME/.ssh:/home/user/.ssh" \
-    -v "$HOME/.gnupg:/home/user/.gnupg" \
-    -v "$HOME/.gitconfig:/home/user/.gitconfig" \
-    -v "$HOME/.zsh_history:/home/user/.zsh_history" \
-    -v "./kattis-cli/:/home/user/kattis-cli" \
     -h debian \
+    -p 9999:9999 \
     "$CONTAINER_TAG" \
     "${args[@]}"
+
