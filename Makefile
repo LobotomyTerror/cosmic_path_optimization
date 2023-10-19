@@ -3,6 +3,7 @@ TEST_ARGS = --verbose --color=yes
 TYPE_CHECK = mypy --strict
 STYLE_CHECK = flake8
 STYLE_FIX = autopep8 --in-place --recursive --aggressive --aggressive
+SEARCH = -find . -type d \( -name __pycache__ -o -name .mypy_cache -o -name .pytest_cache -o -name .hypothesis \) -exec rm -rf {} \; 2>/dev/null || true
 
 .PHONY: all
 all: style-check type-check run-test clean
@@ -22,11 +23,7 @@ run-test:
 
 .PHONY: clean
 clean:
-	rm -rf __pycache__
-	rm -rf .pytest_cache
-	rm -rf .mypy_cache
-	rm -rf .hypothesis
-
+	@$(SEARCH)
 
 .PHONY: push
 push: run-test clean
