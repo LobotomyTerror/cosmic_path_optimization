@@ -6,7 +6,7 @@ UNIT_TEST = pytest
 STYLE_CHECK = flake8
 AUTO_FIX = autopep8 --in-place --recursive --aggressive --aggressive
 TYPE_CHECK = mypy --strict
-CLEANALL = find . -type d \( -name __pycache__ -o -name .mypy_cache -o -name .pytest_cache \) -exec rm -rf {} \; 2>/dev/null || true
+CLEANALL = find . -type d \( -name __pycache__ -o -name .mypy_cache -o -name .pytest_cache -o -name .DS_Store \) -exec rm -rf {} \; 2>/dev/null || true
 
 all: localtest unittest stylecheck fixstyles typecheck clean kattis
 
